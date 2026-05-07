@@ -31,8 +31,8 @@ public class ActivityController {
         if (activityOptional.isEmpty())
             throw new RuntimeException("activity Not found Exception");
             return ResponseEntity.ok(activityOptional.get());
-
-
     }
+
+
 
 }

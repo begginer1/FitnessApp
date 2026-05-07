@@ -33,7 +33,8 @@ public class ActivityService {
                 .build();
         Activity savedActivity = activityRepository.save(activity);
         return ActivityResponseDTO.builder()
-                .id(savedActivity.getId()).caloriesBurned(savedActivity.getCaloriesBurned()).createdAt(savedActivity.getCreatedAt()).type(savedActivity.getType())
+                .id(savedActivity.getId())
+                .caloriesBurned(savedActivity.getCaloriesBurned()).createdAt(savedActivity.getCreatedAt()).type(savedActivity.getType())
                 .startTime(savedActivity.getStartTime()).updatedAt(savedActivity.getUpdatedAt())
                 .userId(savedActivity.getUser().getId())
                 .duration(savedActivity.getDuration()).additionalMetrics(savedActivity.getAdditionalMetrics()).build();

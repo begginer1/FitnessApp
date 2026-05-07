@@ -11,13 +11,15 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @AllArgsConstructor
 @Service
 @Builder
 public class RecommendationService {
 
-    private final RecommendationRepository RecommendationRepository;
+    private final RecommendationRepository recommendationRepository;
     private final ActivityRepository activityRepository;
     private final UserRepository userRepository;
 
@@ -34,6 +36,14 @@ public class RecommendationService {
                 .safety(request.getSafety())
                 .suggestions(request.getSuggestions())
                 .build();
-        return RecommendationRepository.save(recommendation);
+        return recommendationRepository.save(recommendation);
+    }
+
+    public List<Recommendation> findRecommendation(String userId) {
+        return recommendationRepository.findByUserId(userId);
+    }
+
+    public List<Recommendation> findRecommendationthroughActivity(String activityId) {
+        return recommendationRepository.findByActivityId(activityId);
     }
 }

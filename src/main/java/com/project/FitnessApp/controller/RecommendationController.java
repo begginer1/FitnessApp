@@ -7,12 +7,13 @@ import com.project.FitnessApp.service.RecommendationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/recommendation")
 public class RecommendationController {
 
     private final RecommendationService recommendationService;
-
 
     public RecommendationController(RecommendationService recommendationService)
     {
@@ -25,11 +26,19 @@ public class RecommendationController {
         return ResponseEntity.ok(recommendation);
     }
 
-    @GetMapping("/user")
-    public Recommendation getRecomendation(@RequestBody Integer userId)
+    @GetMapping("/user/{userId}")
+    public List<Recommendation> getUserRecomendation(@PathVariable String userId)
     {
-        return null;
+        return recommendationService.findRecommendation(userId);
     }
+
+    @GetMapping("/activity/{activityId}")
+    public List<Recommendation> getActivityRecomendation(@PathVariable String activityId)
+    {
+        return recommendationService.findRecommendationthroughActivity(activityId);
+    }
+
+
 
 
 }
