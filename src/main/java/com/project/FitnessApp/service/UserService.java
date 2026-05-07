@@ -7,7 +7,6 @@ import com.project.FitnessApp.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -19,10 +18,18 @@ public class UserService {
     public UserResponseDTO register(UserRegisterDTO userDto) {
 
         User user=User.builder().email(userDto.getEmail()).lastName(userDto.getLastName()).password(userDto.getPassword())
-                .firstName(userDto.getFirstName()).activities(List.of()).recomendations(List.of())
+                .firstName(userDto.getFirstName()).activities(List.of()).recommendations(List.of())
                 .build();
         user= userRepository.save(user);
         return UserResponseDTO.builder().id(user.getId()).email(user.getEmail()).firstName(user.getFirstName()).lastName(user.getLastName())
                 .password(user.getPassword()).createdAt(user.getCreatedAt()).updatedAt(user.getUpdatedAt()).build();
+    }
+
+
+    public UserResponseDTO find(String userID)
+    {
+        User user=userRepository.findById(userID).get();
+    return  UserResponseDTO.builder().id(user.getId()).email(user.getEmail()).lastName(user.getLastName()).firstName(user.getFirstName())
+            .password(user.getPassword()).updatedAt(user.getUpdatedAt()).createdAt(user.getCreatedAt()).build();
     }
 }

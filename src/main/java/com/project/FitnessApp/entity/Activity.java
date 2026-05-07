@@ -2,7 +2,9 @@ package com.project.FitnessApp.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDateTime;
@@ -10,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-
+@Builder
 @Getter
 @Setter
 @NoArgsConstructor
@@ -29,8 +31,13 @@ public class Activity {
     @Column(columnDefinition = "json")
     private Map<String, Object> additionalMetrics;
 
+    @CreationTimestamp
     private LocalDateTime createdAt;
+
+    @CreationTimestamp
     private LocalDateTime startTime;
+
+    @UpdateTimestamp
     private LocalDateTime updatedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -38,5 +45,5 @@ public class Activity {
     private User user;
 
     @OneToMany(mappedBy="activity",cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<Recomendation> recomendations=new ArrayList<>();
+    private List<Recommendation> recommendations =new ArrayList<>();
 }

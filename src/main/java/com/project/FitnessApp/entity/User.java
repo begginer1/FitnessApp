@@ -32,11 +32,11 @@ public class User {
     private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy ="user",cascade=CascadeType.ALL,orphanRemoval = true)
-    //@JsonIgnore
+    @JsonIgnore
     private List<Activity> activities=new ArrayList<>();
 
     @OneToMany(mappedBy ="user",cascade=CascadeType.ALL,orphanRemoval = true)
-    //@JsonIgnore
-    private List<Recomendation> recomendations=new ArrayList<>();
+    @JsonIgnore
+    private List<Recommendation> recommendations =new ArrayList<>();
 
 }

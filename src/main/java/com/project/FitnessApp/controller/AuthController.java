@@ -6,10 +6,8 @@ import com.project.FitnessApp.dto.UserResponseDTO;
 import com.project.FitnessApp.entity.User;
 import com.project.FitnessApp.service.UserService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
@@ -20,9 +18,15 @@ public class AuthController {
 
 
     @PostMapping("/register")
-    public UserResponseDTO register(@RequestBody UserRegisterDTO userRegisterDTO)
+    public ResponseEntity<UserResponseDTO> register(@RequestBody UserRegisterDTO userRegisterDTO)
     {
-        return userService.register(userRegisterDTO);
+        return ResponseEntity.ok(userService.register(userRegisterDTO));
+    }
+
+    @GetMapping("/find")
+    public UserResponseDTO findUser(@RequestParam String userId)
+    {
+    return  userService.find(userId);
     }
 
 }
